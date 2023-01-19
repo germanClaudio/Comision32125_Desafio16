@@ -16,7 +16,7 @@ const initSocket = (io) => {
         socket.emit('productsAll', await containerProduct.getAllProducts() )   
         
         socket.on("productsAll", async (arrProd) => {
-        renderProduct(await arrProd);
+        renderProduct(await arrProd)
         });
 
         socket.on('newProducto', async (producto) => {

@@ -57,23 +57,28 @@ function makeHtmlList(mensajes) {
 
 // --------------  Products ----------------
 socket.on('productsAll', async (arrProd) => {
-    renderProduct(await arrProd)
+    renderProduct(arrProd)
 })
 
 const addProduct = () => {
-    const title = document.getElementById('title').value
+    const name = document.getElementById('name').value
+    const timestamp = new Date().toLocaleString('en-GB')
     const description = document.getElementById('description').value
     const price = Number(document.getElementById('price').value)
     const picture = document.getElementById('picture').value
     const code = document.getElementById('code').value
     const stock = Number(document.getElementById('stock').value)
 
-    socket.emit('newProducto', { title, description, price, picture, code, stock })
+    console.log("Name: ", name)
+
+    socket.emit('newProducto', { name, timestamp, description, price, picture, code, stock })
 
     return false
 }
 
 const renderProduct = (arrProd) => {
+
+    console.log('arrProd', arrProd)
     
     const html = arrProd.map((element) => {
         return (`<tr>
@@ -81,7 +86,7 @@ const renderProduct = (arrProd) => {
                     <td class="text-center">${element.name}</td>
                     <td class="text-center">${element.description}</td>
                     <td class="text-center">$${element.price}</td>
-                    <td class="text-center"><img class="img-fluid rounded" alt="Product Image" src='${element.picture}' width="100" height="80"></td>
+                    <td class="text-center"><img class="img-fluid rounded" alt="Product image not found" src='${element.picture}' width="100" height="80"></td>
                     <td class="text-center">${element.picture}</td>
                     <td class="text-center">${element.code}</td>
                     <td class="text-center">${element.stock}</td>
@@ -95,7 +100,10 @@ const renderProduct = (arrProd) => {
 
     document.getElementById('capProdList').innerHTML = htmlProdList    
 
-    document.getElementById('title').value = ""
+    document.getElementById('name').value = ""
+    document.getElementById('description').value = ""
     document.getElementById('price').value = ""
-    document.getElementById('thumbnail').value = ""
+    document.getElementById('picture').value = ""
+    document.getElementById('code').value = ""
+    document.getElementById('stock').value = ""
 }

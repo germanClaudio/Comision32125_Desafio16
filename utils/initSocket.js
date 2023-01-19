@@ -10,7 +10,7 @@ const { normalize, schema } = require("normalizr");
 
 const initSocket = (io) => {
   io.on("connection", async (socket) => {
-        console.log("Nuevo cliente conectadoooo!")
+        logger.info("Nuevo cliente conectado!")
         
         // --------------------------  Products --------------------------------
         socket.emit('productsAll', await containerProduct.getAllProducts() )   
@@ -53,7 +53,7 @@ const initSocket = (io) => {
         })
     
         socket.on('disconnect', () => {
-            logger.warning(`User desconectado`)
+            logger.info(`User desconectado`)
         })
 
     })

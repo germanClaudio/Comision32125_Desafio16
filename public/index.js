@@ -75,9 +75,9 @@ const addProduct = () => {
 }
 
 const renderProduct = (arrProd) => {
-
     const html = arrProd.map((element) => {
-            return (`<tr>
+    
+        return (`<tr>
             <th scope="row" class="text-center"><strong>${element._id}</strong></th>
             <td class="text-center">${element.name}</td>
             <td class="text-center">${element.description}</td>
